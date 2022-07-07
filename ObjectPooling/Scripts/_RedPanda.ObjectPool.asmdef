@@ -1,0 +1,16 @@
+{
+    "name": "_RedPanda.ObjectPool",
+    "rootNamespace": "RedPanda",
+    "references": [
+        "GUID:6fad97e61692aa84d954f734f679359f"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

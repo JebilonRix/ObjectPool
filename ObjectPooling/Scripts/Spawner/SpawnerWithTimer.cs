@@ -14,7 +14,7 @@ namespace RedPanda.ObjectPooling
         [SerializeField] private int _limit = 10;
         private int _objectCounter = 0;
 
-        [Header("Randomize Settings")]
+        [Header("Randomizing Settings")]
         [SerializeField] private bool _randomObject = false;
         [SerializeField] private bool _randomPosition = false;
 
@@ -25,8 +25,9 @@ namespace RedPanda.ObjectPooling
 
         [Header("Spawn Attributes")]
         [SerializeField] private float _spawnRate = 1f;
-        [SerializeField] private SO_PooledObject[] _pooledObject;
+        [SerializeField] private WeightedPooledObject[] _pooledObjects;
         [SerializeField] private List<Transform> _spawnPoints = new List<Transform>();
+        private readonly List<SO_PooledObject> _listOfObjs = new List<SO_PooledObject>();
         private bool _startSpawner = false;
         private float _timeCounter = 0;
         #endregion Fields And Properties
@@ -34,6 +35,15 @@ namespace RedPanda.ObjectPooling
         #region Unity Methods
         private void Start()
         {
+            //Adds objects with weight.
+            for (int i = 0; i < _pooledObjects.Length; i++)
+            {
+                for (int j = 0; j < _pooledObjects[i].Weight; j++)
+                {
+                    _listOfObjs.Add(_pooledObjects[i].PooledObject);
+                }
+            }
+
             //if there is no spawn point, adds itselves as transform.
             if (_spawnPoints.Count == 0)
             {
@@ -57,7 +67,7 @@ namespace RedPanda.ObjectPooling
             }
             else
             {
-                p_objectPool.ReleaseAllObjects();
+                ReleaseAllObjects();
                 ResetCounter();
                 ObjectCounter(0);
             }
@@ -84,31 +94,42 @@ namespace RedPanda.ObjectPooling
 
         #region Private Methods
         private void ResetCounter() => _timeCounter = 0;
+        public override void ReleaseAllObjects()
+        {
+            ObjectCounter(0);
+            base.ReleaseAllObjects();
+        }
         private void SpawnLogic()
         {
             if (!_startSpawner)
-            { return; }
+            {
+                return;
+            }
             if (!_delayFinished)
-            { return; }
-            if (_hasLimit)
-            { return; }
-            if (_limit <= _objectCounter)
-            { return; }
+            {
+                return;
+            }
+            if (_hasLimit && _limit <= _objectCounter)
+            {
+                return;
+            }
 
             _timeCounter += Time.deltaTime;
 
             if (_timeCounter >= _spawnRate)
             {
                 //Decides which object is spawning.
-                SO_PooledObject pooledObject = _randomObject ? _pooledObject.GetRandomValue() : _pooledObject[0];
+                SO_PooledObject pooledObject = _randomObject ? _listOfObjs.GetRandomValue() : _listOfObjs[0];
 
                 //Decides where to spawn.
                 Transform spawnPoint = _randomPosition ? _spawnPoints.GetRandomValue() : _spawnPoints[0];
 
                 //Gets object from pool.
-                p_objectPool.GetObject(pooledObject, spawnPoint.position, spawnPoint.rotation.eulerAngles, p_isParentThis ? transform : null);
+                objectPool.GetObject(pooledObject, spawnPoint.position, spawnPoint.rotation.eulerAngles, isParentThis ? transform : null);
 
                 ResetCounter();
+
+                //increases counter
                 ObjectCounter(1);
             }
         }

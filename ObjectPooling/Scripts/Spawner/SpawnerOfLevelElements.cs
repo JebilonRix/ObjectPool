@@ -5,20 +5,30 @@ namespace RedPanda.ObjectPooling
 {
     public class SpawnerOfLevelElements : BaseSpawner
     {
-        [SerializeField] private List<ObjectAndLocation> _objAndLocList = new List<ObjectAndLocation>();
+        #region Fields And Properties
+        [SerializeField] private List<ObjectAndLocation> _objectsAndLocationsList = new List<ObjectAndLocation>();
+        #endregion Fields And Properties
 
+        #region Public Methods
+        /// <summary>
+        /// Spawns all objects at once.
+        /// </summary>
         public void SpawnLevel()
         {
-            //Spawns all objects.
-            foreach (var item in _objAndLocList)
+            foreach (ObjectAndLocation item in _objectsAndLocationsList)
             {
-                p_objectPool.GetObject(item.pooledObject, item.position, item.rotation, p_isParentThis ? transform : null);
+                objectPool.GetObject(item.pooledObject, item.position, item.rotation, isParentThis ? transform : null);
+                //GameObject obj = objectPool.GetObject(item.pooledObject, item.position, item.rotation, isParentThis ? transform : null);
+                //obj.GetComponent<BasePooledObject>().SpawnedBySpawner = true;
             }
         }
-        public void ReleaseLevel()
+        /// <summary>
+        /// Relases all objects.
+        /// </summary>
+        public override void ReleaseAllObjects()
         {
-            //Relases all objects.
-            p_objectPool.ReleaseAllObjects();
+            base.ReleaseAllObjects();
         }
+        #endregion Public Methods
     }
 }

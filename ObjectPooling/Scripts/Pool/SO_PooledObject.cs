@@ -12,38 +12,28 @@ namespace RedPanda.ObjectPooling
 
         public string PooledObjectTag => _pooledObjectTag;
         public GameObject Prefab => _prefab;
-        public SO_ObjectPool Pool { get => _pool; private set => _pool = value; }
         #endregion Fields And Properties
 
         #region Unity Methods
-        private void Awake()
-        {
-            if (Pool == null)
-            {
-                Pool = Resources.Load<SO_ObjectPool>("Pool");
-
-                if (Pool == null)
-                {
-                    Debug.Log("Pool is not exist.");
-                }
-            }
-        }
         private void OnEnable()
         {
-            if (!Pool.PoolList.Contains(this))
+            if (!_pool.PoolList.Contains(this))
             {
-                Pool.PoolList.Add(this);
+                _pool.PoolList.Add(this);
             }
         }
         #endregion Unity Methods
 
         #region Public Methods
-        /// <summary>
-        /// This method is for release this object to pool.
-        /// </summary>
-        public void RelaseObjectToPool()
+        public void OnStart()
         {
-            Pool.RelaseObject(this);
+            //Checks Garbage collector game object, if there is or not.
+            _pool.GarbageCollectorCheck();
+        }
+        public void RelaseObjectToPool(BasePooledObject obj)
+        {
+            //This method is for release this object to pool.
+            _pool.RelaseObject(obj);
         }
         #endregion Public Methods
     }

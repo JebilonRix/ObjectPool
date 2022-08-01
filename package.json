@@ -5,7 +5,7 @@
   "description": "ObjectPooling system.",
   "unity": "2019.1",
   "dependencies": {
-    "com.redpanda.utility": "0.0.1",
+    "com.redpanda.utility": "0.0.1"
   },
   "keywords": [
     "ObjectPool"

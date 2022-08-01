@@ -1,0 +1,16 @@
+{
+    "name": "com.redpanda.object-pooling.tests",
+    "rootNamespace": "",
+    "references": [
+        "com.redpanda.object-pooling"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

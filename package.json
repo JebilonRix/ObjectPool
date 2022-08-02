@@ -5,13 +5,11 @@
   "description": "ObjectPooling system.",
   "unity": "2019.1",
   "dependencies": {
-
   },
   "keywords": [
     "ObjectPool"
   ],
   "author": {
     "name": "RedPanda"
-  },
-  "type": "library"
+  }
 }

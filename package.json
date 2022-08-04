@@ -5,11 +5,16 @@
   "description": "ObjectPooling system.",
   "unity": "2019.1",
   "dependencies": {
+    "com.redpanda.utility" "https://github.com/JebilonRix/Utility.git"
   },
   "keywords": [
     "ObjectPool"
   ],
   "author": {
     "name": "RedPanda"
+  },
+    "repository": {
+    "url": "https://github.com/JebilonRix/ObjectPool.git",
+    "type": "git"
   }
 }

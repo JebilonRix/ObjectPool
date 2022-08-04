@@ -1,15 +1,20 @@
 {
   "name": "com.redpanda.object-pooling",
   "version": "1.0.0",
-  "displayName": "RedPanda Object Pooling",
-  "description": "Object pooling system",
+  "displayName": "RedPanda ObjectPooling",
+  "description": "ObjectPooling system.",
+  "unity": "2019.1",
   "dependencies": {
-    "com.redpanda.utility": "0.0.1"
+    "com.redpanda.utility" "https://github.com/JebilonRix/Utility.git"
   },
   "keywords": [
     "ObjectPool"
   ],
   "author": {
     "name": "RedPanda"
+  },
+    "repository": {
+    "url": "https://github.com/JebilonRix/ObjectPool.git",
+    "type": "git"
   }
 }

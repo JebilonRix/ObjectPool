@@ -1,10 +1,10 @@
 {
   "name": "com.redpanda.object-pooling",
   "version": "1.0.0",
-  "displayName": "RedPanda ObjectPooling",
-  "description": "ObjectPooling system.",
-  "unity": "2019.1",
+  "displayName": "RedPanda Object Pooling",
+  "description": "Object pooling system",
   "dependencies": {
+    "com.redpanda.utility": "0.0.1"
   },
   "keywords": [
     "ObjectPool"
